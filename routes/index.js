@@ -11,11 +11,11 @@ router
     res.json(shoppingList)
 })
 .post((req, res) => {
-    const { name, quantity } = req.body
+    const { name, price } = req.body
     shoppingList.push({
         id: id++,
         name,
-        quantity
+        price
     })
     res.json(shoppingList)
 })
@@ -29,12 +29,12 @@ router
 })
 .patch((req, res) => {
     const { id } = req.params
-    const { name, quantity } = req.body
+    const { name, price } = req.body
 
     const updated = shoppingList.find(el => el.id === parseInt(id))
 
     if(name) updated.name = name
-    if(quantity) updated.quantity = quantity
+    if(price) updated.quantity = price
 
     res.send(updated)
 })
