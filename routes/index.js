@@ -24,22 +24,18 @@ router
 .route('/:id')
 .get((req, res) => {
     const { id } = req.params
-    const getEl = shoppingList.filter(el => el.id === id)
+    const getEl = shoppingList.filter(el => el.id === parseInt(id))
     res.json(getEl)
 })
 .patch((req, res) => {
     const { id } = req.params
     const { name, quantity } = req.body
 
-    shoppingList.find(el => {
-        if(el.id === id) {
-            el.name = name
-            el.quantity = quantity
-        }
-        
-        res.json({message: 'Shopping list updated!'})
-    })
+    const updated = shoppingList.find(el => el.id === parseInt(id))
 
+    updated.name = name
+    updated.quantity = quantity
+    res.send(updated)
 })
 
 .delete((req, res) => {
