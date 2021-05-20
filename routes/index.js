@@ -33,15 +33,16 @@ router
 
     const updated = shoppingList.find(el => el.id === parseInt(id))
 
-    updated.name = name
-    updated.quantity = quantity
+    if(name) updated.name = name
+    if(quantity) updated.quantity = quantity
+
     res.send(updated)
 })
 
 .delete((req, res) => {
     const { id } = req.params
     if(shoppingList.length > 0) {
-        const listIndex = shoppingList.findIndex(el => el.id === id)
+        const listIndex = shoppingList.findIndex(el => el.id === parseInt(id))
         shoppingList.splice(listIndex, 1)
         res.json({message: "Deleted successfully!"})
     }
